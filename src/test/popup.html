@@ -1,35 +1,46 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" href="./style.css">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./assets/css/style.css">
   </head>
   <body>
     <div class="p-popup">
       <div class="p-popup__url">
         <div class="p-popup__url-cap">
-          URL
+          POST&thinsp;URL
         </div>
         <div class="p-popup__url-input">
-          <input type="text">
+          <input type="text" class="js-url">
         </div>
       </div>
+
+      <div class="p-popup__cap">
+        <div class="p-popup__cap-head">KEY</div>
+        <div class="p-popup__cap-body">VALUE</div>
+      </div>
       <ul class="p-popup__list">
-        <li class="p-popup__item">
+        <!-- <li class="p-popup__item">
           <div class="p-popup__head">
-            <input type="text">
+            <input type="text" class="js-name">
           </div>
           <div class="p-popup__body">
-            <input type="text">
+            <input type="text" class="js-value">
           </div>
-        </li>
+          <div class="p-popup__close">
+            <button class="p-popup__close-btn js-close">x</button>
+          </div>
+        </li> -->
       </ul>
-      <div class="">
-        <button>+</button>
-      </div>
-      <div class="">
-        <button>POST</button>
+      <div class="p-popup__footer">
+        <div class="p-popup__post">
+          <button class="p-popup__post-btn js-post">POST</button>
+        </div>
+        <div class="p-popup__plus">
+          <button class="p-popup__plus-btn js-plus">+</button>
+        </div>
       </div>
     </div>
-    <script src="./script.js"></script>
+    <script src="./assets/js/script.js"></script>
   </body>
 </html>

@@ -20,6 +20,130 @@ time, mark, audio, video {
   box-sizing: border-box;
 }
 
-.test {
-  width: 20px;
+ol, ul {
+  list-style: none;
+  list-style-type: none;
+}
+
+button {
+  cursor: pointer;
+  outline: none;
+  border: none;
+  border-radius: 2px;
+  margin: 0;
+  border: 1px solid #000;
+  background-color: rgb(240, 240, 240);
+  &:hover {
+    background-color: rgb(210, 210, 210);
+  }
+  &:active {
+    background-color: rgb(177, 177, 177);
+  }
+}
+
+input {
+  outline: none;
+  border: 1px solid #000;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+input {
+  width: 100%;
+  font-size: 16px;
+  line-height: 28px;
+  padding: 0 5px;
+}
+
+.p-popup {
+  width: 400px;
+  padding: 20px;
+  &__url {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    &-cap {
+      font-weight: bold;
+      width: 90px;
+      flex: none;
+    }
+    &-input {
+      width: 100%;
+    }
+  }
+
+  &__cap {
+    display: flex;
+    font-weight: bold;
+    &-head {
+      flex: none;
+      width: 90px;
+      padding-right: 5px;
+    }
+    &-body {
+      width: 100%;
+    }
+  }
+  &__list {
+
+  }
+  &__item {
+    display: flex;
+    &+& {
+      margin-top: 4px;
+    }
+  }
+  &__head {
+    flex: none;
+    width: 90px;
+    padding-right: 5px;
+  }
+  &__body {
+    width: 100%;
+    padding-right: 5px;
+  }
+  &__close {
+    &-btn {
+      width: 30px;
+      height: 30px;
+    }
+  }
+  &__footer {
+    margin-top: 4px;
+    display: flex;
+  }
+  &__post {
+    width: 100%;
+    padding-right: 5px;
+    &-btn {
+      width: 100%;
+      height: 30px;
+      [data-state="post"] &, [data-state="result"] & {
+        pointer-events: none;
+      }
+      [data-state="post"] & {
+        opacity: 0.5;
+      }
+
+      [data-status="success"] & {
+        background-color: rgb(175, 255, 175);
+      }
+      [data-status="caution"] & {
+        background-color: rgb(255, 255, 180);
+      }
+      [data-status="error"] & {
+        background-color: rgb(255, 57, 57);
+      }
+    }
+  }
+  &__plus {
+    display: flex;
+    width: 30px;
+    text-align: right;
+    &-btn {
+      width: 30px;
+      height: 30px;
+    }
+  }
 }
