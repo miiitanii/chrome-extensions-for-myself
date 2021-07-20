@@ -1,7 +1,7 @@
 # chrome-extensions-formyself
  自分用のGoogle Chrome拡張機能です
 
-## test
+## sample
 公式のGetting startedページのサンプルです。
 
 [https://developer.chrome.com/docs/extensions/mv3/getstarted/](https://developer.chrome.com/docs/extensions/mv3/getstarted/)

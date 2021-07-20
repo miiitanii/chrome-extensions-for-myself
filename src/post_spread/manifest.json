@@ -1,0 +1,22 @@
+{
+  "name": "Post Spread",
+  "description": "Sends a POST request with page information to the specified URL.",
+  "version": "1.0.0.0",
+  "manifest_version": 3,
+  "permissions": ["storage", "activeTab"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "/assets/img/icon_16.png",
+      "32": "/assets/img/icon_32.png",
+      "48": "/assets/img/icon_48.png",
+      "128": "/assets/img/icon_128.png"
+    }
+  },
+  "icons": {
+    "16": "/assets/img/icon_16.png",
+    "32": "/assets/img/icon_32.png",
+    "48": "/assets/img/icon_48.png",
+    "128": "/assets/img/icon_128.png"
+  }
+}
