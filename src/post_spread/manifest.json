@@ -1,6 +1,6 @@
 {
   "name": "Post Spread",
-  "description": "Sends a POST request with page information to the specified URL.",
+  "description": "Make a POST request to the specified URL for page information in json format.",
   "version": "1.0.0.0",
   "manifest_version": 3,
   "permissions": ["storage", "activeTab"],

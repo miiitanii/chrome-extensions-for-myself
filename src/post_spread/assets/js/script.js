@@ -20,7 +20,7 @@ let addForm = (name = "", value = "") => {
   _form.classList.add("p-popup__item");
   _form.innerHTML = `
     <div class="p-popup__head">
-      <input type="text" class="js-name" value="${name}">
+      <input type="text" class="js-key" value="${name}">
     </div>
     <div class="p-popup__body">
       <input type="text" class="js-value" value="${value}">
@@ -57,13 +57,23 @@ postBtn.addEventListener("click", () => {
   // POSTURLを保存
   let postUrl = urlInput.value;
   chrome.storage.local.set({ "postUrl": postUrl });
+
+  // 送信データを整理
+  let _data = {}
+  let _key = document.querySelectorAll('.js-key');
+  let _value = document.querySelectorAll('.js-value');
+
+  for(let _i=0;_i<_key.length;_i++) {
+    _data[_key[_i].value] = _value[_i].value;
+  }
+
   // POST処理
   popup.dataset.state = "post";
 
   postBtn.innerHTML = "POST中……";
 
   var xhr = new XMLHttpRequest();
-  xhr.open("POST", postUrl, true);
+  xhr.open("GET", postUrl, true);
   xhr.onreadystatechange = function() {
     // リクエスト終了時
     if(xhr.readyState === XMLHttpRequest.DONE) {
@@ -88,5 +98,6 @@ postBtn.addEventListener("click", () => {
       postBtn.innerHTML = "POST";
     },1500);
   };
-  xhr.send();
+  xhr.setRequestHeader("Content-Type", "application/json");
+  xhr.send(JSON.stringify(_data));
 });
