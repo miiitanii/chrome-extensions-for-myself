@@ -56,6 +56,18 @@ input {
   padding: 0 5px;
 }
 
+select {
+  appearance: none;
+  outline: none;
+  border: 1px solid #000;
+}
+
+select {
+  font-size: 16px;
+  font-weight: bold;
+  padding: 2px 3px;
+}
+
 .p-popup {
   width: 400px;
   padding: 20px;
@@ -65,8 +77,11 @@ input {
     align-items: center;
     &-cap {
       font-weight: bold;
-      width: 90px;
+      width: 100px;
       flex: none;
+    }
+    &-select, &-cap {
+      display: inline-block;
     }
     &-input {
       width: 100%;
@@ -78,7 +93,7 @@ input {
     font-weight: bold;
     &-head {
       flex: none;
-      width: 90px;
+      width: 100px;
       padding-right: 5px;
     }
     &-body {
@@ -96,7 +111,7 @@ input {
   }
   &__head {
     flex: none;
-    width: 90px;
+    width: 100px;
     padding-right: 5px;
   }
   &__body {

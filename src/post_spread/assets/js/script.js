@@ -3,11 +3,15 @@ let popup = document.querySelector('.p-popup');
 let popupList = document.querySelector('.p-popup__list');
 
 // input
+let methodSelect = document.querySelector('.js-method');
 let urlInput = document.querySelector('.js-url');
-// POSTURLがストレージにある場合取得
-chrome.storage.local.get(["postUrl"], (result) => {
-  if(result.postUrl){
-    urlInput.value = result.postUrl
+// URLがストレージにある場合取得
+chrome.storage.local.get(["method", "url"], (_result) => {
+  if(_result["method"]){
+    methodSelect.options[_result["method"]].selected = true;
+  }
+  if(_result["url"]){
+    urlInput.value = _result["url"]
   }
 });
 
@@ -15,6 +19,7 @@ chrome.storage.local.get(["postUrl"], (result) => {
 let plusBtn = document.querySelector('.js-plus');
 let postBtn = document.querySelector('.js-post');
 
+// フォームを追加
 let addForm = (name = "", value = "") => {
   const _form = document.createElement("li");
   _form.classList.add("p-popup__item");
@@ -35,12 +40,14 @@ let addForm = (name = "", value = "") => {
   popupList.appendChild(_form);
 }
 
+// 現在のタブの情報を取得
 function getCurrentTab() {
   let queryOptions = { active: true, currentWindow: true };
   let [tab] = chrome.tabs.query(queryOptions);
   return tab;
 }
 
+// フォームの初期設定
 async function initForm() {
   let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
   addForm("title", tab.title);
@@ -49,55 +56,77 @@ async function initForm() {
 
 initForm();
 
+function setPopupState(_state){
+  popup.dataset.state = _state;
+}
+function setPopupStatus(_status){
+  popup.dataset.status = _status;
+}
+
 plusBtn.addEventListener("click", () => {
   addForm();
 });
 
 postBtn.addEventListener("click", () => {
-  // POSTURLを保存
-  let postUrl = urlInput.value;
-  chrome.storage.local.set({ "postUrl": postUrl });
+  // メソッドを保存
+  let _method = methodSelect.value;
+  chrome.storage.local.set({ "method": _method });
+
+  // URLを保存
+  let _url = urlInput.value;
+  chrome.storage.local.set({ "url": _url });
 
   // 送信データを整理
-  let _data = {}
+  let _data = {};
+  let _getParams = "?";
   let _key = document.querySelectorAll('.js-key');
   let _value = document.querySelectorAll('.js-value');
 
   for(let _i=0;_i<_key.length;_i++) {
     _data[_key[_i].value] = _value[_i].value;
+    if(_i!=0){
+      _getParams += "&";
+    }
+    _getParams += _key[_i].value + "=" + _value[_i].value;
   }
 
   // POST処理
-  popup.dataset.state = "post";
-
-  postBtn.innerHTML = "POST中……";
+  setPopupState("post");
+  postBtn.innerHTML = "通信中……";
 
   var xhr = new XMLHttpRequest();
-  xhr.open("GET", postUrl, true);
   xhr.onreadystatechange = function() {
     // リクエスト終了時
     if(xhr.readyState === XMLHttpRequest.DONE) {
       var _status = xhr.status;
       postBtn.innerHTML = `HTTP STATUS：${_status}`;
-      popup.dataset.state = "result"
+      setPopupState("result");
       if (_status >= 200 && _status < 400) {
         // 正常終了
         if(_status == 200) {
-          popup.dataset.status = "success";
+          setPopupStatus("success");
         } else {
-          popup.dataset.status = "caution";
+          setPopupStatus("caution");
         }
       } else {
         // エラー
-        popup.dataset.status = "error";
+        setPopupStatus("error");
       }
     }
     setTimeout(function(){
-      popup.dataset.state = "";
-      popup.dataset.status = "";
+      // 状態をリセット
+      setPopupState("");
+      setPopupStatus("");
       postBtn.innerHTML = "POST";
     },1500);
   };
-  xhr.setRequestHeader("Content-Type", "application/json");
-  xhr.send(JSON.stringify(_data));
+  if(_method == 1){
+    xhr.open("POST", _url, true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.send(JSON.stringify(_data));
+  } else {
+    xhr.open("GET", _url + _getParams, true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.send();
+  }
 });

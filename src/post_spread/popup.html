@@ -8,7 +8,13 @@
     <div class="p-popup">
       <div class="p-popup__url">
         <div class="p-popup__url-cap">
-          POST&thinsp;URL
+          <span class="p-popup__url-select">
+            <select class="js-method">
+              <option value="0">GET</option>
+              <option value="1" selected>POST</option>
+            </select>
+          </span>
+          <span class="p-popup__url-text">URL</span>
         </div>
         <div class="p-popup__url-input">
           <input type="text" class="js-url">

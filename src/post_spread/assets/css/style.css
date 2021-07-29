@@ -60,6 +60,20 @@ input {
   padding: 0 5px;
 }
 
+select {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  outline: none;
+  border: 1px solid #000;
+}
+
+select {
+  font-size: 16px;
+  font-weight: bold;
+  padding: 2px 3px;
+}
+
 .p-popup {
   width: 400px;
   padding: 20px;
@@ -77,10 +91,14 @@ input {
 
 .p-popup__url-cap {
   font-weight: bold;
-  width: 90px;
+  width: 100px;
   -webkit-box-flex: 0;
       -ms-flex: none;
           flex: none;
+}
+
+.p-popup__url-select, .p-popup__url-cap {
+  display: inline-block;
 }
 
 .p-popup__url-input {
@@ -98,7 +116,7 @@ input {
   -webkit-box-flex: 0;
       -ms-flex: none;
           flex: none;
-  width: 90px;
+  width: 100px;
   padding-right: 5px;
 }
 
@@ -120,7 +138,7 @@ input {
   -webkit-box-flex: 0;
       -ms-flex: none;
           flex: none;
-  width: 90px;
+  width: 100px;
   padding-right: 5px;
 }
 
